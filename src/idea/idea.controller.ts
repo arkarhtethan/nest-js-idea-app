@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+    Body, Controller, Delete, Get, Param, Post, Put, UsePipes,
+    // ValidationPipe
+} from '@nestjs/common';
 import { Logger } from '@nestjs/common/services/logger.service';
-import { IdeaDTO } from './idea.dto';
+import { ValidationPipe } from 'src/shared/validation.pipe';
+import { CreateIdeaDto } from './create-idea.dto';
 import { IdeaEntity } from './idea.entity';
 import { IdeaService } from './idea.service';
 
@@ -16,7 +20,8 @@ export class IdeaController {
     }
 
     @Post()
-    createIdea (@Body() idea: IdeaDTO) {
+    @UsePipes(new ValidationPipe())
+    createIdea (@Body() idea: CreateIdeaDto) {
         return this.ideaServie.create(idea);
     }
 
@@ -26,10 +31,11 @@ export class IdeaController {
     }
 
     @Put(':id')
+    @UsePipes(new ValidationPipe())
     updateIdea (
         @Param('id') id: string,
-        @Body() data: Partial<IdeaEntity>
-    ): Promise<IdeaEntity> {
+        @Body() data: Partial<CreateIdeaDto>,
+    ) {
         return this.ideaServie.update(id, data);
     }
 
