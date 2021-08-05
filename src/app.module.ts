@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { IdeaEntity } from './ideas/idea.entity';
+import { IdeaEntity } from './idea/idea.entity';
+import { IdeaModule } from './idea/idea.module';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { IdeaEntity } from './ideas/idea.entity';
         entities: [IdeaEntity],
       }
     ),
+    IdeaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
