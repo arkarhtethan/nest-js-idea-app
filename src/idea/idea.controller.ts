@@ -2,7 +2,6 @@
 /* eslint-disable prettier/prettier */
 import {
     Body, Controller, Delete, Get, Param, Post, Put, UsePipes,
-    // ValidationPipe
 } from '@nestjs/common';
 import { Logger } from '@nestjs/common/services/logger.service';
 import { ValidationPipe } from 'src/shared/validation.pipe';
@@ -10,7 +9,7 @@ import { CreateIdeaDto } from './create-idea.dto';
 import { IdeaEntity } from './idea.entity';
 import { IdeaService } from './idea.service';
 
-@Controller('idea')
+@Controller('api/idea')
 export class IdeaController {
     constructor(private ideaServie: IdeaService) { }
 
