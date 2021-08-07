@@ -8,6 +8,8 @@ import { IdeaEntity } from './idea/idea.entity';
 import { IdeaModule } from './idea/idea.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
+import { UserEntity } from './user/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,10 +23,11 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
         database: 'ideas',
         synchronize: true,
         logging: true,
-        entities: [IdeaEntity],
+        entities: [IdeaEntity, UserEntity],
       }
     ),
     IdeaModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService,
